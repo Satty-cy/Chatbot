@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string input;
+    cout << "Chatbot: Hi! I'm a simple chatbot. How can I help you?\n";
+
+    while (true) {
+        cout << "You: ";
+        getline(cin, input);
+
+        if (input == "exit") {
+            cout << "Chatbot: Goodbye!\n";
+            break;
+        } else if (input.find("hello") != string::npos) {
+            cout << "Chatbot: Hello! How are you today?\n";
+        } else if (input.find("help") != string::npos) {
+            cout << "Chatbot: I'm here to assist you. Ask me anything.\n";
+        } else {
+            cout << "Chatbot: I'm sorry, I don't understand that.\n";
+        }
+    }
+    return 0;
+}

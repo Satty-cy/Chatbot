@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+int main() {
+    string input, name;
+    map<string, string> memory;
+
+    cout << "Chatbot: Hi! What's your name?\n";
+    cout << "You: ";
+    getline(cin, name);
+    cout << "Chatbot: Nice to meet you, " << name << "! How can I help you?\n";
+
+    while (true) {
+        cout << "You: ";
+        getline(cin, input);
+
+        if (input == "exit") {
+            cout << "Chatbot: Goodbye, " << name << "! See you later.\n";
+            break;
+        } else if (input.find("remember") != string::npos) {
+            string key = input.substr(input.find("remember") + 9);
+            cout << "Chatbot: What should I remember about \"" << key << "\"?\n";
+            cout << "You: ";
+            getline(cin, memory[key]);
+            cout << "Chatbot: Got it! I'll remember that.\n";
+        } else if (memory.find(input) != memory.end()) {
+            cout << "Chatbot: Here's what I remember: " << memory[input] << "\n";
+        } else {
+            cout << "Chatbot: I'm not sure how to respond to that.\n";
+        }
+    }
+    return 0;
+}

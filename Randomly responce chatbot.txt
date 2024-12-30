@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    string input;
+    string responses[] = {
+        "That's interesting!",
+        "Can you tell me more?",
+        "I see, go on.",
+        "Why do you think that?",
+        "I'm not sure about that."
+    };
+
+    srand(time(0));
+    cout << "Chatbot: Hi! What's on your mind?\n";
+
+    while (true) {
+        cout << "You: ";
+        getline(cin, input);
+
+        if (input == "exit") {
+            cout << "Chatbot: It was nice talking to you. Bye!\n";
+            break;
+        } else {
+            int randomIndex = rand() % 5;
+            cout << "Chatbot: " << responses[randomIndex] << "\n";
+        }
+    }
+    return 0;
+}

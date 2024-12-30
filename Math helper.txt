@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+
+int main() {
+    string input;
+
+    cout << "Chatbot: Hi! I can help with simple math. Type 'exit' to quit.\n";
+
+    while (true) {
+        cout << "You: ";
+        getline(cin, input);
+
+        if (input == "exit") {
+            cout << "Chatbot: Goodbye!\n";
+            break;
+        }
+
+        stringstream ss(input);
+        double num1, num2;
+        char op;
+        ss >> num1 >> op >> num2;
+
+        if (ss.fail()) {
+            cout << "Chatbot: Please enter a valid math expression (e.g., 3 + 4).\n";
+        } else {
+            switch (op) {
+                case '+': cout << "Chatbot: " << num1 + num2 << "\n"; break;
+                case '-': cout << "Chatbot: " << num1 - num2 << "\n"; break;
+                case '*': cout << "Chatbot: " << num1 * num2 << "\n"; break;
+                case '/': 
+                    if (num2 != 0) 
+                        cout << "Chatbot: " << num1 / num2 << "\n";
+                    else 
+                        cout << "Chatbot: Cannot divide by zero!\n";
+                    break;
+                default: cout << "Chatbot: Unsupported operator.\n"; break;
+            }
+        }
+    }
+    return 0;
+}
