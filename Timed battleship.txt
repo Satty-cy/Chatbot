@@ -1,0 +1,38 @@
+#include <chrono>
+#include <thread>
+using namespace chrono;
+
+void timedPlay() {
+    char grid[GRID_SIZE][GRID_SIZE];
+    initializeGrid(grid);
+    placeShips(grid);
+
+    int attempts = 10;
+    auto start = steady_clock::now();
+
+    while (attempts > 0) {
+        auto now = steady_clock::now();
+        auto elapsed = duration_cast<seconds>(now - start).count();
+
+        if (elapsed > 30) { // 30 seconds to complete
+            cout << "Time's up! Game over.\n";
+            break;
+        }
+
+        displayGrid(grid);
+        int row, col;
+
+        cout << "You have " << (30 - elapsed) << " seconds remaining!\n";
+        cout << "Enter your attack coordinates: ";
+        cin >> row >> col;
+
+        if (grid[row][col] == 'S') {
+            cout << "Hit!\n";
+            grid[row][col] = 'X';
+        } else {
+            cout << "Miss!\n";
+            grid[row][col] = 'O';
+        }
+        attempts--;
+    }
+}
